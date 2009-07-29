@@ -37,7 +37,7 @@ Note that even if you have set configuration for MySQL but libmysql.dll can'tbe 
 
 = LOGS =
 
-To make debugging process easier KSP uses logging system. All logs are in folder: <profile>\.KSP\logs\<log date> where <profile> is the name of user folder (usually C:\Users\<user name>) and <log date> is folder containing KSP startup date and time in it's name. Last folder in <profile>\.KSP\logs\<profile>\.KSP\logs\ contains the most recent logs.
+To make debugging process easier KSP uses logging system. All logs are in folder: <user profile>\.KSP\logs\<log date> where <user profile> is the name of user folder (usually C:\Users\<user name>) and <log date> is folder containing KSP startup date and time in it's name. Last folder in <user profile>\.KSP\logs\<user profile>\.KSP\logs\ contains the most recent logs.
 
 Logs are created per thread to make it easier for developers to establish which thread is causing troubles and when. To help us with debugging process always remember to attach all recent logs to your bug report.
 
