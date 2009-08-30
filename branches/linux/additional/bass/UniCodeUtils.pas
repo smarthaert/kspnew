@@ -13,6 +13,8 @@ interface
 
 {$IFDEF WINDOWS}
 uses Windows;
+{$ELSE}
+uses LResources;
 {$ENDIF}
 
  {$INCLUDE Delphi_Ver.inc}
@@ -32,10 +34,14 @@ type
   function DupeString(const AText: ansistring; ACount: Integer): ansistring;
  {$ENDIF}
 
+{$IFDEF WINDOS}
+
   function ToPWideChar(s: pAnsiChar): PWideChar;
   function ToPMultiByte(s: pWideChar): PAnsiChar;
   function ToWideString(s: AnsiString): WideString;
   function StrToUTF8(s: pAnsiChar): UTF8string;
+
+{$ENDIF}
 
 
 implementation
@@ -235,6 +241,8 @@ begin
 end;
 {$ENDIF}
 
+{$IFDEF WINDOS}
+
 function ToPWideChar(s: pAnsiChar): PWideChar;
 var
  //  pw1 : array[0..1024] of WideChar;
@@ -272,6 +280,7 @@ begin
    Result := ToPWideChar(@pa1[0]);
 end;
 
+
 function ToPMultiByte(s: pWideChar): PAnsiChar;
 var
   // pw1 : array[0..1024] of Char;
@@ -297,6 +306,7 @@ begin
       Result := nil;  }
 end;
 
+
 function StrToUTF8(s: pAnsiChar): UTF8string;
 var
    pw_char : PWideChar;
@@ -307,6 +317,8 @@ begin
    else
       result := '';
 end;
+
+{$ENDIF}
 
 end.
 
