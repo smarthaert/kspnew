@@ -33,8 +33,8 @@ interface
 uses
   Classes;
 
-function UTF8ToWString(const S: ansistring): WideString;
-function WStringToUTF8(const S: WideString): ansistring;
+function UTF8ToWString(const S: UTF8String): WideString;
+function WStringToUTF8(const S: WideString): UTF8String;
 function UpCaseW(const C: WideChar): WideChar;
 function LowCaseW(const C: WideChar): WideChar;
 function UpperCaseW(const S: WideString): WideString;
@@ -55,36 +55,29 @@ function WideFileSetDate(const FileName: WideString; Age: Integer): Integer;
 implementation
 
 uses
-  SysUtils, Windows, TntCollection{, TntClasses};
+  SysUtils{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
 
 (* -------------------------------------------------------------------------- *)
 
-function UTF8ToWString(const S: ansiString): WideString;
-var
-  Len: Integer;
+function UTF8ToWString(const S: UTF8String): WideString;
 begin
-  Len := MultiByteToWideChar(CP_UTF8, 0, PAnsiChar(S), Length(S), nil, 0);
-  SetLength(Result, Len);
-  MultiByteToWideChar(CP_UTF8, 0, PAnsiChar(S), Length(S), PWideChar(Result), Len);
+  Result:=UTF8Decode(S);
 end;
+
 
 (* -------------------------------------------------------------------------- *)
 
-function WStringToUTF8(const S: WideString): ansiString;
-var
-  Len: Integer;
+function WStringToUTF8(const S: WideString): UTF8String;
 begin
-  Len := WideCharToMultiByte(CP_UTF8, 0, PWideChar(S), Length(S), nil, 0, nil, nil);
-  SetLength(Result, Len);
-  WideCharToMultiByte(CP_UTF8, 0, PWideChar(S), Length(S), PAnsiChar(Result), Len, nil, nil);
+  Result:=UTF8Encode(S);
 end;
+
 
 (* -------------------------------------------------------------------------- *)
 
 function UpCaseW(const C: WideChar): WideChar;
 begin
-  Result := C;
-  CharUpperW(PWideChar(Result));
+  Result := UpperCase(C);
 end;
 
 (* -------------------------------------------------------------------------- *)

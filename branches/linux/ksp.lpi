@@ -9,7 +9,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="6"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -49,7 +49,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="157">
+    <Units Count="160">
       <Unit0>
         <Filename Value="ksp.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -654,9 +654,11 @@
       <Unit71>
         <Filename Value="additional/bass/CommonATL.pas"/>
         <UnitName Value="CommonATL"/>
-        <CursorPos X="7" Y="214"/>
-        <TopLine Value="192"/>
-        <UsageCount Value="2"/>
+        <CursorPos X="26" Y="74"/>
+        <TopLine Value="56"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit71>
       <Unit72>
@@ -1117,11 +1119,9 @@
       <Unit136>
         <Filename Value="additional/bass/TntCollection.pas"/>
         <UnitName Value="TntCollection"/>
-        <CursorPos X="27" Y="11"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="4"/>
+        <CursorPos X="36" Y="20"/>
+        <TopLine Value="2"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit136>
       <Unit137>
@@ -1196,18 +1196,20 @@
       <Unit146>
         <Filename Value="additional/bass/ID3v1.pas"/>
         <UnitName Value="ID3v1"/>
-        <CursorPos X="32" Y="46"/>
-        <TopLine Value="14"/>
+        <CursorPos X="30" Y="38"/>
+        <TopLine Value="38"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="11"/>
+        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit146>
       <Unit147>
         <Filename Value="additional/bass/UniCodeUtils.pas"/>
         <UnitName Value="UniCodeUtils"/>
-        <CursorPos X="9" Y="44"/>
+        <CursorPos X="34" Y="19"/>
         <TopLine Value="13"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit147>
@@ -1260,10 +1262,10 @@
       <Unit155>
         <Filename Value="additional/bass/WAVfile.pas"/>
         <UnitName Value="WAVfile"/>
-        <CursorPos X="18" Y="4"/>
+        <CursorPos X="41" Y="8"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit155>
@@ -1273,87 +1275,129 @@
         <CursorPos X="1" Y="1"/>
         <TopLine Value="504"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit156>
+      <Unit157>
+        <Filename Value="../../../../../usr/share/fpcsrc/rtl/inc/wstringh.inc"/>
+        <CursorPos X="16" Y="27"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="8"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit157>
+      <Unit158>
+        <Filename Value="../../../../../usr/share/fpcsrc/rtl/objpas/sysutils/filutilh.inc"/>
+        <CursorPos X="10" Y="84"/>
+        <TopLine Value="53"/>
+        <UsageCount Value="10"/>
+      </Unit158>
+      <Unit159>
+        <Filename Value="../../../../../usr/share/fpcsrc/rtl/objpas/sysutils/sysstrh.inc"/>
+        <CursorPos X="10" Y="69"/>
+        <TopLine Value="78"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit159>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="24" HistoryIndex="23">
       <Position1>
-        <Filename Value="main.pas"/>
-        <Caret Line="793" Column="25" TopLine="771"/>
+        <Filename Value="additional/bass/UniCodeUtils.pas"/>
+        <Caret Line="236" Column="35" TopLine="190"/>
       </Position1>
       <Position2>
-        <Filename Value="main.pas"/>
-        <Caret Line="2118" Column="31" TopLine="2099"/>
+        <Filename Value="additional/bass/UniCodeUtils.pas"/>
+        <Caret Line="263" Column="16" TopLine="228"/>
       </Position2>
       <Position3>
-        <Filename Value="main.pas"/>
-        <Caret Line="663" Column="12" TopLine="652"/>
+        <Filename Value="additional/bass/UniCodeUtils.pas"/>
+        <Caret Line="272" Column="46" TopLine="248"/>
       </Position3>
       <Position4>
-        <Filename Value="main.pas"/>
-        <Caret Line="562" Column="30" TopLine="555"/>
+        <Filename Value="additional/bass/BASSPlayer.pas"/>
+        <Caret Line="3593" Column="57" TopLine="3573"/>
       </Position4>
       <Position5>
-        <Filename Value="main.pas"/>
-        <Caret Line="766" Column="13" TopLine="746"/>
+        <Filename Value="additional/bass/BASSPlayer.pas"/>
+        <Caret Line="2676" Column="39" TopLine="2658"/>
       </Position5>
       <Position6>
-        <Filename Value="main.pas"/>
-        <Caret Line="663" Column="14" TopLine="637"/>
+        <Filename Value="additional/bass/UniCodeUtils.pas"/>
+        <Caret Line="275" Column="17" TopLine="266"/>
       </Position6>
       <Position7>
-        <Filename Value="main.pas"/>
-        <Caret Line="584" Column="42" TopLine="570"/>
+        <Filename Value="additional/bass/BASSPlayer.pas"/>
+        <Caret Line="12" Column="9" TopLine="1"/>
       </Position7>
       <Position8>
         <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="1" Column="6" TopLine="1"/>
+        <Caret Line="17" Column="12" TopLine="1"/>
       </Position8>
       <Position9>
         <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="246" Column="14" TopLine="228"/>
+        <Caret Line="292" Column="60" TopLine="268"/>
       </Position9>
       <Position10>
         <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="236" Column="35" TopLine="190"/>
+        <Caret Line="240" Column="1" TopLine="156"/>
       </Position10>
       <Position11>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="263" Column="16" TopLine="228"/>
+        <Filename Value="additional/bass/ID3v1.pas"/>
+        <Caret Line="46" Column="32" TopLine="14"/>
       </Position11>
       <Position12>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="272" Column="46" TopLine="248"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="214" Column="7" TopLine="182"/>
       </Position12>
       <Position13>
-        <Filename Value="additional/bass/BASSPlayer.pas"/>
-        <Caret Line="3593" Column="57" TopLine="3573"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position13>
       <Position14>
-        <Filename Value="additional/bass/BASSPlayer.pas"/>
-        <Caret Line="2676" Column="39" TopLine="2658"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="27" Column="20" TopLine="10"/>
       </Position14>
       <Position15>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="275" Column="17" TopLine="266"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="55" Column="19" TopLine="30"/>
       </Position15>
       <Position16>
-        <Filename Value="additional/bass/BASSPlayer.pas"/>
-        <Caret Line="12" Column="9" TopLine="1"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="49" Column="43" TopLine="26"/>
       </Position16>
       <Position17>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="17" Column="12" TopLine="1"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="73" Column="8" TopLine="42"/>
       </Position17>
       <Position18>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="292" Column="60" TopLine="268"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="62" Column="35" TopLine="42"/>
       </Position18>
       <Position19>
-        <Filename Value="additional/bass/UniCodeUtils.pas"/>
-        <Caret Line="240" Column="1" TopLine="156"/>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="84" Column="20" TopLine="60"/>
       </Position19>
+      <Position20>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="62" Column="19" TopLine="48"/>
+      </Position20>
+      <Position21>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="74" Column="1" TopLine="36"/>
+      </Position21>
+      <Position22>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="66" Column="46" TopLine="46"/>
+      </Position22>
+      <Position23>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="81" Column="8" TopLine="57"/>
+      </Position23>
+      <Position24>
+        <Filename Value="additional/bass/CommonATL.pas"/>
+        <Caret Line="69" Column="11" TopLine="57"/>
+      </Position24>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
