@@ -43,7 +43,7 @@ function GetCurDir: WideString;
 procedure SetCurDir(const Dir: WideString);
 function FileCreateW(const FileName: WideString): Integer;
 function FileOpenW(const FileName: WideString; Mode: LongWord): Integer;
-function WideFileSetDate(const FileName: WideString; Age: Integer): Integer;
+function WideFileSetDate(const FileName: WideString; Age: LongInt): LongInt;
 
 {type
   TFileStreamW = class(THandleStream)
@@ -55,7 +55,7 @@ function WideFileSetDate(const FileName: WideString; Age: Integer): Integer;
 implementation
 
 uses
-  SysUtils{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
+  SysUtils, FileUtil{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
 
 (* -------------------------------------------------------------------------- *)
 
@@ -76,67 +76,53 @@ end;
 (* -------------------------------------------------------------------------- *)
 
 function UpCaseW(const C: WideChar): WideChar;
+var
+  w: widestring;
 begin
-  Result := UpperCase(C);
+  w:=C;
+  W := UpCase(W);
+  Result:=w[1];
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function LowCaseW(const C: WideChar): WideChar;
+var
+  w: widestring;
 begin
-  Result := C;
-  CharLowerW(PWideChar(Result));
+  w:=C;
+  W := LowerCase(W);
+  Result:=w[1];
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function UpperCaseW(const S: WideString): WideString;
-var
-  Len: Integer;
 begin
-  Len := Length(S);
-  Result := S;
-  if Len > 0 then
-    CharUpperBuffW(Pointer(Result), Len);
+  Result:=UpCase(S);
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function LowerCaseW(const S: WideString): WideString;
-var
-  Len: Integer;
 begin
-  Len := Length(S);
-  Result := S;
-  if Len > 0 then
-    CharLowerBuffW(Pointer(Result), Len);
+  Result:=LowerCase(S);
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function GetCurDir: WideString;
-var
-  Len: Integer;
 begin
-  SetLength(Result, 512);
-  Len := GetCurrentDirectoryW(512, PWideChar(Result));
-  if Len <> 0 then
-  begin
-    SetLength(Result, Len);
-    GetCurrentDirectoryW(Len, PWideChar(Result));
-  end;
+  Result:=UTF8Decode(GetCurrentDirUTF8);
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 procedure SetCurDir(const Dir: WideString);
 begin
-  if SetCurrentDirectoryW(PWideChar(Dir)) then
+  if not SetCurrentDirUTF8(UTF8Encode(Dir)) then
   begin
-    FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER or FORMAT_MESSAGE_FROM_SYSTEM,
-      nil, GetLastError, 0, PWideChar(Error), 0, nil);
-    raise EInOutError.CreateFmt('Cannot change to directory "%s". %s',
-      [ExpandFilename(Dir), SysErrorMessage(GetLastError)]);
+    raise EInOutError.Create('Cannot change to directory "%s". %s');
   end;
 end;
 
@@ -144,14 +130,19 @@ end;
 
 function FileCreateW(const FileName: WideString): Integer;
 begin
+{$IFDEF WINDOWS}
   Result := Integer(CreateFileW(PWideChar(FileName), GENERIC_READ or
     GENERIC_WRITE,
     0, nil, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0));
+{$ELSE}
+  Result := Integer(FileCreate(FileName, fmOpenReadWrite));
+{$ENDIF}
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function FileOpenW(const FileName: WideString; Mode: LongWord): Integer;
+{$IFDEF WINDOWS}
 const
   AccessMode: array[0..2] of LongWord = (
     GENERIC_READ,
@@ -171,21 +162,17 @@ begin
       ShareMode[(Mode and $F0) shr 4], nil, OPEN_EXISTING,
       FILE_ATTRIBUTE_NORMAL, 0));
 end;
+{$ELSE}
+begin
+  Result:=Integer(FileOpen(FileName, Mode))
+end;
+{$ENDIF}
 
 (* -------------------------------------------------------------------------- *)
 
-function WideFileSetDate(const FileName: WideString; Age: Integer): Integer;
-var
-  handle: THandle;
+function WideFileSetDate(const FileName: WideString; Age: LongInt): LongInt;
 begin
-  handle := WideFileOpen(FileName, fmOpenWrite);
-  if handle = THandle(-1) then
-    Result := GetLastError
-  else
-  begin
-    Result := FileSetDate(handle, Age);
-    FileClose(handle);
-  end;
+  Result:=FileSetDateUTF8(FileName, Age);
 end;
 
 (* -------------------------------------------------------------------------- *)

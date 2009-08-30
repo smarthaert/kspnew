@@ -34,11 +34,12 @@ type
   function DupeString(const AText: ansistring; ACount: Integer): ansistring;
  {$ENDIF}
 
+ function ToWideString(s: AnsiString): WideString;
+
 {$IFDEF WINDOS}
 
   function ToPWideChar(s: pAnsiChar): PWideChar;
   function ToPMultiByte(s: pWideChar): PAnsiChar;
-  function ToWideString(s: AnsiString): WideString;
   function StrToUTF8(s: pAnsiChar): UTF8string;
 
 {$ENDIF}
@@ -241,6 +242,13 @@ begin
 end;
 {$ENDIF}
 
+function ToWideString(s: AnsiString): WideString;
+var
+   p : pByte;
+begin
+   Result:=UTF8Decode(AnsiToUtf8(s));
+end;
+
 {$IFDEF WINDOS}
 
 function ToPWideChar(s: pAnsiChar): PWideChar;
@@ -266,18 +274,6 @@ begin
       Result := @pw1[0];
   { end else
       Result := nil; }
-end;
-
-function ToWideString(s: AnsiString): WideString;
-var
-   p : pByte;
-begin
-   p := @pa1[0];
-   Move(s[1], p^, length(s));
-   inc(p, length(s));
-   p^ := 0;
-
-   Result := ToPWideChar(@pa1[0]);
 end;
 
 
