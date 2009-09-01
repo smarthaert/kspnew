@@ -50,7 +50,7 @@
         <PackageName Value="LCL"/>
       </Item4>
     </RequiredPackages>
-    <Units Count="171">
+    <Units Count="173">
       <Unit0>
         <Filename Value="ksp.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -81,7 +81,7 @@
         <Filename Value="additional\bass\BASSPlayer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="BASSPlayer"/>
-        <CursorPos X="65" Y="11"/>
+        <CursorPos X="15" Y="8"/>
         <TopLine Value="1"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="201"/>
@@ -385,9 +385,7 @@
         <UnitName Value="APETag"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit36>
       <Unit37>
@@ -572,18 +570,22 @@
         <Filename Value="itools\threads\MainWindowStartupThreads.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MainWindowStartupThreads"/>
-        <CursorPos X="28" Y="73"/>
-        <TopLine Value="51"/>
+        <CursorPos X="30" Y="52"/>
+        <TopLine Value="39"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="202"/>
+        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit61>
       <Unit62>
         <Filename Value="itools\medialib\MediaFolders.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="MediaFolders"/>
-        <CursorPos X="36" Y="144"/>
-        <TopLine Value="125"/>
+        <CursorPos X="1" Y="183"/>
+        <TopLine Value="146"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="202"/>
+        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit62>
       <Unit63>
@@ -657,10 +659,10 @@
       <Unit71>
         <Filename Value="additional\bass\CommonATL.pas"/>
         <UnitName Value="CommonATL"/>
-        <CursorPos X="11" Y="141"/>
+        <CursorPos X="9" Y="135"/>
         <TopLine Value="133"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="11"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit71>
@@ -669,8 +671,8 @@
         <UnitName Value="OggVorbis"/>
         <CursorPos X="22" Y="84"/>
         <TopLine Value="64"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="10"/>
+        <EditorIndex Value="7"/>
+        <UsageCount Value="11"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit72>
@@ -679,8 +681,8 @@
         <UnitName Value="MPEGaudio"/>
         <CursorPos X="23" Y="854"/>
         <TopLine Value="834"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="15"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="16"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit73>
@@ -833,7 +835,7 @@
         <UnitName Value="splash"/>
         <CursorPos X="12" Y="33"/>
         <TopLine Value="1"/>
-        <UsageCount Value="180"/>
+        <UsageCount Value="181"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit92>
       <Unit93>
@@ -867,7 +869,7 @@
         <UnitName Value="complib"/>
         <CursorPos X="148" Y="4"/>
         <TopLine Value="1"/>
-        <UsageCount Value="169"/>
+        <UsageCount Value="170"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit97>
       <Unit98>
@@ -906,9 +908,9 @@
         <Filename Value="additional\multilog\kspthreadutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KSPThreadUtils"/>
-        <CursorPos X="1" Y="124"/>
-        <TopLine Value="111"/>
-        <UsageCount Value="161"/>
+        <CursorPos X="33" Y="128"/>
+        <TopLine Value="122"/>
+        <UsageCount Value="162"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit103>
       <Unit104>
@@ -1149,9 +1151,9 @@
       <Unit139>
         <Filename Value="additional\bass\AACfile.pas"/>
         <UnitName Value="AACfile"/>
-        <CursorPos X="22" Y="367"/>
+        <CursorPos X="5" Y="347"/>
         <TopLine Value="347"/>
-        <EditorIndex Value="9"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="10"/>
         <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
@@ -1191,7 +1193,7 @@
         <UnitName Value="Support"/>
         <CursorPos X="37" Y="33"/>
         <TopLine Value="12"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="49"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit144>
       <Unit145>
@@ -1207,9 +1209,7 @@
         <UnitName Value="ID3v1"/>
         <CursorPos X="26" Y="545"/>
         <TopLine Value="179"/>
-        <EditorIndex Value="2"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit146>
       <Unit147>
@@ -1217,9 +1217,7 @@
         <UnitName Value="UniCodeUtils"/>
         <CursorPos X="51" Y="22"/>
         <TopLine Value="12"/>
-        <EditorIndex Value="1"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit147>
       <Unit148>
@@ -1273,9 +1271,7 @@
         <UnitName Value="WAVfile"/>
         <CursorPos X="41" Y="8"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="4"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
         <SyntaxHighlighter Value="Delphi"/>
       </Unit155>
       <Unit156>
@@ -1360,9 +1356,7 @@
         <Filename Value="C:\lazarus\lcl\include\fileutil.inc"/>
         <CursorPos X="26" Y="188"/>
         <TopLine Value="186"/>
-        <EditorIndex Value="10"/>
         <UsageCount Value="10"/>
-        <Loaded Value="True"/>
       </Unit168>
       <Unit169>
         <Filename Value="C:\lazarus\fpc\2.2.2\source\rtl\objpas\sysutils\filutilh.inc"/>
@@ -1377,128 +1371,137 @@
         <TopLine Value="453"/>
         <UsageCount Value="10"/>
       </Unit170>
+      <Unit171>
+        <Filename Value="additional\bass\Musepack.pas"/>
+        <UnitName Value="Musepack"/>
+        <CursorPos X="23" Y="154"/>
+        <TopLine Value="145"/>
+        <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit171>
+      <Unit172>
+        <Filename Value="E:/ksp/KSP2009/universal/source/additional/bass\WMAReader.pas"/>
+        <UnitName Value="WMAReader"/>
+        <CursorPos X="29" Y="740"/>
+        <TopLine Value="728"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit172>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="28" HistoryIndex="27">
       <Position1>
-        <Filename Value="additional\bass\APEtag.pas"/>
-        <Caret Line="25" Column="47" TopLine="106"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="166" Column="1" TopLine="146"/>
       </Position1>
       <Position2>
-        <Filename Value="additional\bass\MPEGAudio.pas"/>
-        <Caret Line="76" Column="42" TopLine="48"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="173" Column="1" TopLine="146"/>
       </Position2>
       <Position3>
-        <Filename Value="additional\bass\UniCodeUtils.pas"/>
-        <Caret Line="48" Column="29" TopLine="30"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="174" Column="1" TopLine="146"/>
       </Position3>
       <Position4>
-        <Filename Value="additional\bass\UniCodeUtils.pas"/>
-        <Caret Line="20" Column="1" TopLine="7"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="182" Column="1" TopLine="146"/>
       </Position4>
       <Position5>
-        <Filename Value="additional\bass\MPEGAudio.pas"/>
-        <Caret Line="843" Column="58" TopLine="834"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="176" Column="1" TopLine="146"/>
       </Position5>
       <Position6>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="674" Column="41" TopLine="665"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="177" Column="1" TopLine="146"/>
       </Position6>
       <Position7>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="84" Column="34" TopLine="64"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="178" Column="1" TopLine="146"/>
       </Position7>
       <Position8>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="289" Column="38" TopLine="290"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="179" Column="1" TopLine="146"/>
       </Position8>
       <Position9>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="367" Column="34" TopLine="347"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="174" Column="1" TopLine="146"/>
       </Position9>
       <Position10>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="395" Column="36" TopLine="375"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="175" Column="1" TopLine="146"/>
       </Position10>
       <Position11>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="427" Column="16" TopLine="407"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="176" Column="1" TopLine="146"/>
       </Position11>
       <Position12>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="433" Column="20" TopLine="413"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="177" Column="1" TopLine="146"/>
       </Position12>
       <Position13>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="630" Column="38" TopLine="610"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="178" Column="1" TopLine="146"/>
       </Position13>
       <Position14>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="663" Column="16" TopLine="634"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="179" Column="1" TopLine="146"/>
       </Position14>
       <Position15>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="83" Column="42" TopLine="72"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="182" Column="1" TopLine="146"/>
       </Position15>
       <Position16>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="659" Column="48" TopLine="639"/>
+        <Filename Value="itools\medialib\MediaFolders.pas"/>
+        <Caret Line="183" Column="1" TopLine="146"/>
       </Position16>
       <Position17>
-        <Filename Value="C:\lazarus\lcl\include\fileutil.inc"/>
-        <Caret Line="188" Column="26" TopLine="186"/>
+        <Filename Value="itools\threads\MainWindowStartupThreads.pas"/>
+        <Caret Line="47" Column="1" TopLine="27"/>
       </Position17>
       <Position18>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="659" Column="49" TopLine="639"/>
+        <Filename Value="itools\threads\MainWindowStartupThreads.pas"/>
+        <Caret Line="49" Column="1" TopLine="29"/>
       </Position18>
       <Position19>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="664" Column="21" TopLine="644"/>
+        <Filename Value="itools\threads\MainWindowStartupThreads.pas"/>
+        <Caret Line="51" Column="1" TopLine="31"/>
       </Position19>
       <Position20>
-        <Filename Value="additional\bass\OggVorbis.pas"/>
-        <Caret Line="675" Column="54" TopLine="655"/>
+        <Filename Value="itools\threads\MainWindowStartupThreads.pas"/>
+        <Caret Line="58" Column="1" TopLine="38"/>
       </Position20>
       <Position21>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="56" Column="32" TopLine="295"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="925" Column="42" TopLine="906"/>
       </Position21>
       <Position22>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="24" Column="46" TopLine="1"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="926" Column="10" TopLine="906"/>
       </Position22>
       <Position23>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="54" Column="42" TopLine="22"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="8" Column="24" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="121" Column="42" TopLine="99"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="926" Column="10" TopLine="906"/>
       </Position24>
       <Position25>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="159" Column="28" TopLine="139"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="925" Column="9" TopLine="906"/>
       </Position25>
       <Position26>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="245" Column="55" TopLine="225"/>
+        <Filename Value="E:/ksp/KSP2009/universal/source/additional/bass\WMAReader.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position26>
       <Position27>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="261" Column="45" TopLine="241"/>
+        <Filename Value="additional\bass\BASSPlayer.pas"/>
+        <Caret Line="801" Column="21" TopLine="779"/>
       </Position27>
       <Position28>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="293" Column="45" TopLine="273"/>
-      </Position28>
-      <Position29>
-        <Filename Value="additional\bass\AACfile.pas"/>
-        <Caret Line="358" Column="16" TopLine="338"/>
-      </Position29>
-      <Position30>
         <Filename Value="additional\bass\BASSPlayer.pas"/>
-        <Caret Line="12" Column="18" TopLine="34"/>
-      </Position30>
+        <Caret Line="787" Column="20" TopLine="780"/>
+      </Position28>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
@@ -1557,6 +1560,20 @@
     </Other>
   </CompilerOptions>
   <Debugging>
+    <BreakPoints Count="3">
+      <Item1>
+        <Source Value="itools\threads\MainWindowStartupThreads.pas"/>
+        <Line Value="34"/>
+      </Item1>
+      <Item2>
+        <Source Value="itools\medialib\MediaFolders.pas"/>
+        <Line Value="163"/>
+      </Item2>
+      <Item3>
+        <Source Value="itools\medialib\MediaFolders.pas"/>
+        <Line Value="182"/>
+      </Item3>
+    </BreakPoints>
     <Exceptions Count="3">
       <Item1>
         <Name Value="EAbort"/>

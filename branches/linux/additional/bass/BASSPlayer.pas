@@ -5,7 +5,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-{$IFDEF WINDOWS}Windows,{$ENDIF} Messages, SysUtils, Classes, Forms, Controls, StdCtrls, ExtCtrls,
+  LResources, Messages, SysUtils, Classes, Forms, Controls, StdCtrls, ExtCtrls,
   Dynamic_BASS, RT_BASSWMA, RT_basscd, RT_bassmidi, bass_aac, RT_bassmix, ioplug,
   MPEGAudio, OggVorbis, AACfile, WMAFile, WAVFile,
   MPEGInfoBox, OGGInfoBox, WMAInfoBox, Dialogs, FileSupportLst, UniCodeUtils, LMessages
@@ -776,7 +776,6 @@ var
    msgCount : integer = 0;
    typeStr : pchar;
    Entries_Msg_Str : integer;
-   CheckedLocalString : boolean = false;
 
 function GetProgDir : string;
 begin
@@ -784,146 +783,8 @@ begin
 end;
 
 procedure ShowErrorMsgBox(ErrorStr : string);  // * Modified at Ver 2.00
-var
-   F: TextFile;
-   SearchRec: TSearchRec;
-   MyEntry : boolean;
-   CommonEntry : boolean;
-   S : string;
-   tmpStr : string;
-   localStr : string;
-   i : integer;
-   SepPos : integer;
-   ErrorStr_ : string;
-
 begin
-  if not CheckedLocalString then
-  begin
-    CheckedLocalString := true;
-    if FindFirst(ExtractFilePath(ParamStr(0)) + 'lang_*.txt', faAnyFile, SearchRec) = 0 then
-    begin
-
-      SetLength(msgs_org, 16);
-      SetLength(msgs_local, 16);
-      Entries_Msg_Str := 16;
-      MyEntry := false;
-      CommonEntry := false;
-
-      AssignFile(F, ExtractFilePath(ParamStr(0)) + SearchRec.Name);
-      Reset(F);
-      FindClose(SearchRec);
-
-      while not Eof(F) do
-      begin
-        Readln(F, S);
-        S := trim(S);
-
-        if S = '' then
-           continue;
-        if copy(S, 1, 2) = '//' then
-           continue;
-
-        if (S[1] = '[') and (S[length(S)] = ']') then
-        begin
-           tmpStr := copy(S, 2, length(S) - 2);
-           if uppercase(tmpStr) = 'TBASSPLAYER' then
-           begin
-              MyEntry := true;
-              CommonEntry := false;
-              continue;
-           end else if uppercase(tmpStr) = 'COMMON' then
-           begin
-              MyEntry := false;
-              CommonEntry := true;
-              continue;
-           end else if MyEntry then
-              break
-           else begin
-              MyEntry := false;
-              CommonEntry := false;
-              continue;
-           end
-        end
-        else if (not MyEntry) and (not CommonEntry) then
-           continue;
-
-        if ((S[1] = '&') or (S[1] = '$') or (S[1] = '*') or (S[1] = '^')) then
-           continue;
-
-      // Store message strings (format : Original=Local)
-        SepPos := pos('=', S);
-        if SepPos = 0 then
-           continue;
-
-        localStr := trim(copy(S, SepPos + 1, length(S) - SepPos));
-        if localStr = '' then
-           continue;
-        if localStr[1] = '"' then
-           localStr := copy(localStr, 2, length(localStr) - 1);
-        if localStr[length(localStr)] = '"' then
-           localStr := copy(localStr, 1, length(localStr) - 1);
-        if localStr = '' then
-           continue;
-
-        msgs_org[msgCount] := trim(copy(S, 1, SepPos - 1));  // original message string
-        msgs_local[msgCount] := localStr;
-        inc(msgCount);
-        if msgCount = Entries_Msg_Str then
-        begin
-           Entries_Msg_Str := Entries_Msg_Str + 16;
-           SetLength(msgs_org, Entries_Msg_Str);
-           SetLength(msgs_local, Entries_Msg_Str);
-        end;
-      end;
-
-      CloseFile(F);
-      SetLength(msgs_org, msgCount);
-      SetLength(msgs_local, msgCount);
-
-    end else
-      FindClose(SearchRec);
-
-  // following sentences are to get the local text for the title of messagebox
-    typeStr := 'Error';
-    tmpStr := string(typeStr);
-    if msgCount > 0 then
-    begin
-       for i := 1 to msgCount do
-       begin
-         if msgs_org[i - 1] = tmpStr then
-         begin
-            typeStr := pChar(msgs_local[i - 1]);
-            break;
-         end;
-       end;
-    end;
-  end;
-
-   localStr := ErrorStr;
-
-   if msgCount > 0 then
-   begin
-   // I programmed to apply the localization for only the 1st line of message string.
-   // (=> message string may include variable contents in it, ex : file name to open )
-      SepPos := pos(chr(10), ErrorStr);
-      if SepPos > 0 then
-         ErrorStr_ := copy(ErrorStr, 1, SepPos - 1)
-      else
-         ErrorStr_ := ErrorStr;
-
-      for i := 1 to msgCount do
-      begin
-         if ErrorStr_ = msgs_org[i - 1] then
-         begin
-            localStr := msgs_local[i - 1];
-            if SepPos > 0 then
-               localStr := localStr + chr(10) + copy(ErrorStr, SepPos + 1, length(ErrorStr) - Seppos);
-            break;
-         end;
-      end;
-   end;
-
-   Application.MessageBox(pChar(localStr), typeStr, MB_OK + MB_ICONERROR);
+  MessageDlg(ErrorStr, mtError,[mbOk], 0);
 end;
 
 // -------------------------------- Event Handlers ------------------------------
@@ -935,7 +796,7 @@ var
    tmpStr, StreamTitle : ansistring;
    TitlePos, DelimeterPos : integer;
    PMetaSyncParam : ^TMetaSyncParam;
-   tmpPChar : pAnsiChar;
+   //tmpPChar : pAnsiChar;
    tmpStr2 : WideString;
 begin
    PMetaSyncParam := user;
@@ -979,13 +840,7 @@ begin
             StreamTitle := copy(tmpStr, TitlePos + 7, length(tmpStr) - TitlePos - 7)
          else
             StreamTitle := copy(tmpStr, TitlePos + 7, DelimeterPos - TitlePos - 8);
-        {$IFDEF DELPHI_2007_BELOW}
-         tmpStr2 := UTF8Decode(StreamTitle);
-        {$ELSE}
-         tmpStr2 := UTF8ToWideString(StreamTitle);
-        {$ENDIF}
-         tmpPChar := ToPMultiByte(PWideChar(tmpStr2));
-         StreamTitle := ansistring(tmpPChar);
+         StreamTitle := UTF8Decode(StreamTitle);
       end else
          if DelimeterPos = 0 then
             StreamTitle := copy(tmpStr, TitlePos + 13, length(tmpStr) - TitlePos - 13)
@@ -2806,13 +2661,8 @@ begin
             if posEX('Title=', tmpStr1, 1) <> 0 then
            {$ENDIF}
             begin
-              {$IFDEF DELPHI_2007_BELOW}
-               tmpStr2 := UTF8Decode(tmpStr1);
-              {$ELSE}
-               tmpStr2 := UTF8ToWideString(tmpStr1);
-              {$ENDIF}
-               tmpPChar := ToPMultiByte(PWideChar(tmpStr2));
-               tmpStr1 := ansistring(tmpPChar);
+               tmpStr1 := UTF8Decode(tmpStr1);
+
                StreamInfo.Title := copy(tmpStr1, 7, length(tmpStr1) - 6);
             end;
            {$IFDEF DELPHI_2007_BELOW}
@@ -2821,14 +2671,7 @@ begin
             if posEX('Author=', tmpStr1, 1) <> 0 then
            {$ENDIF}
             begin
-              {$IFDEF DELPHI_2007_BELOW}
-               tmpStr2 := UTF8Decode(tmpStr1);
-              {$ELSE}
-               tmpStr2 := UTF8ToWideString(tmpStr1);
-              {$ENDIF}
-
-               tmpPChar := ToPMultiByte(PWideChar(tmpStr2));
-               tmpStr1 := ansistring(tmpPChar);
+               tmpStr1 := UTF8Decode(tmpStr1);
                StreamInfo.Artist := copy(tmpStr1, 8, length(tmpStr1) - 7);
             end;
             inc(TagP, StrLen(TagP) + 1);
