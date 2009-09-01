@@ -55,7 +55,7 @@ function WideFileSetDate(const FileName: WideString; Age: LongInt): LongInt;
 implementation
 
 uses
-  SysUtils, FileUtil{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
+  SysUtils, FileUtil;//{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
 
 (* -------------------------------------------------------------------------- *)
 
@@ -130,43 +130,15 @@ end;
 
 function FileCreateW(const FileName: WideString): Integer;
 begin
-{$IFDEF WINDOWS}
-  Result := Integer(CreateFileW(PWideChar(FileName), GENERIC_READ or
-    GENERIC_WRITE,
-    0, nil, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0));
-{$ELSE}
   Result := Integer(FileCreate(FileName, fmOpenReadWrite));
-{$ENDIF}
 end;
 
 (* -------------------------------------------------------------------------- *)
 
 function FileOpenW(const FileName: WideString; Mode: LongWord): Integer;
-{$IFDEF WINDOWS}
-const
-  AccessMode: array[0..2] of LongWord = (
-    GENERIC_READ,
-    GENERIC_WRITE,
-    GENERIC_READ or GENERIC_WRITE);
-  ShareMode: array[0..4] of LongWord = (
-    0,
-    0,
-    FILE_SHARE_READ,
-    FILE_SHARE_WRITE,
-    FILE_SHARE_READ or FILE_SHARE_WRITE);
-begin
-  Result := -1;
-  if ((Mode and 3) <= fmOpenReadWrite) and
-    ((Mode and $F0) <= fmShareDenyNone) then
-    Result := Integer(CreateFileW(PWideChar(FileName), AccessMode[Mode and 3],
-      ShareMode[(Mode and $F0) shr 4], nil, OPEN_EXISTING,
-      FILE_ATTRIBUTE_NORMAL, 0));
-end;
-{$ELSE}
 begin
   Result:=Integer(FileOpen(FileName, Mode))
 end;
-{$ENDIF}
 
 (* -------------------------------------------------------------------------- *)
 

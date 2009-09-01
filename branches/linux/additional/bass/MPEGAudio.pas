@@ -73,7 +73,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  Classes, SysUtils, ID3v1, ID3v2, APEtag, TntCollection;
+  Classes, SysUtils, ID3v1, ID3v2, APEtag;
 
 const
   { Table for bit rates }
@@ -851,7 +851,7 @@ begin
     FResetData;
     SourceFile := hINVALID_HANDLE_VALUE;
     try
-        SourceFile := WideFileOpen(FileName, fmOpenRead  or fmShareDenyWrite);
+        SourceFile := FileOpen(FileName, fmOpenRead  or fmShareDenyWrite);
         if (SourceFile = hINVALID_HANDLE_VALUE) then
         begin
             Result := false;

@@ -8,8 +8,7 @@ uses
 {$IFDEF WINDOWS}Windows,{$ENDIF} Messages, SysUtils, Classes, Forms, Controls, StdCtrls, ExtCtrls,
   Dynamic_BASS, RT_BASSWMA, RT_basscd, RT_bassmidi, bass_aac, RT_bassmix, ioplug,
   MPEGAudio, OggVorbis, AACfile, WMAFile, WAVFile,
-  MPEGInfoBox, OGGInfoBox, WMAInfoBox, Dialogs, FileSupportLst,
-  TntCollection, UniCodeUtils, LMessages
+  MPEGInfoBox, OGGInfoBox, WMAInfoBox, Dialogs, FileSupportLst, UniCodeUtils, LMessages
   {$IFNDEF DELPHI_2007_BELOW}, AnsiStrings{$ENDIF}
   {, EmbededBrowser, TestMB};
 
