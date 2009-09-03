@@ -33,7 +33,6 @@ interface
 
 uses
   SysUtils,
-  Windows,
   Dialogs;
 
 type

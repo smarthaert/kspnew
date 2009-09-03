@@ -73,7 +73,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  Classes, SysUtils, ID3v1, ID3v2, APEtag;
+  Classes, SysUtils, ID3v1, ID3v2, APEtag, FileUtil;
 
 const
   { Table for bit rates }
@@ -283,8 +283,10 @@ type
 
 implementation
 
+{$IFDEF WINDOWS}
 uses
   Windows;
+{$ENDIF}
 
 const
   { Limitation constants }
@@ -839,7 +841,12 @@ end;
 
 function TMPEGaudio.ReadFromFile(const FileName: WideString): Boolean;
 var
+{$IFDEF WINDOWS}
     SourceFile: hFileInt;
+{$ELSE}
+    SourceFile: TFileStream;
+    FFileLentgh: Int64;
+{$ENDIF}
     Data: array [1..MAX_MPEG_FRAME_LENGTH * 2] of Byte;
     Transferred: DWORD;
     Position : Int64;
@@ -849,23 +856,39 @@ var
     Code: Integer;
 begin
     FResetData;
+{$IFDEF WINDOWS}
     SourceFile := hINVALID_HANDLE_VALUE;
+{$ENDIF}
     try
+{$IFDEF WINDOWS}
         SourceFile := FileOpen(FileName, fmOpenRead  or fmShareDenyWrite);
         if (SourceFile = hINVALID_HANDLE_VALUE) then
         begin
             Result := false;
             Exit;
         end;
+{$ELSE}
+        SourceFile:=TFileStream.Create(FileName, fmOpenRead  or fmShareDenyWrite);
+{$ENDIF}
 
         { At first search for tags & Lyrics3 then search for a MPEG frame and VBR data }
         if (FID3v2.ReadFromFile(FileName)) and
            (FID3v1.ReadFromFile(FileName)) then
         begin
+{$IFDEF WINDOWS}
             FFileLength := GetFileSize(SourceFile, nil);
+{$ELSE}
+            FFileLentgh:=FileSize(FileName);
+{$ENDIF}
             Position := FID3v2.Size;
+{$IFDEF WINDOWS}
             SetFilePointer(SourceFile, Position, nil, FILE_BEGIN);
             ReadFile(SourceFile, Data, SizeOf(Data), Transferred, nil);
+{$ELSE}
+
+            SourceFile.Seek(Position, 0);
+            SourceFile.Read(Data, SizeOf(Data));
+{$ENDIF}
             FFrame := FindFrame(Data, FVBR);
             // Search for vendor ID at the beginning
             FVendorID := FindVendorID(Data, FFrame.Size * 5);
@@ -874,7 +897,11 @@ begin
             { Try to find the first frame if no frame at the beginning found ]}
             if (not FFrame.Found) and (Transferred = SizeOf(Data)) then
             repeat
+{$IFDEF WINDOWS}
                 ReadFile(SourceFile, Data, SizeOf(Data), Transferred, nil);
+{$ELSE}
+                SourceFile.Read(Data, SizeOf(Data));
+{$ENDIF}
                 Inc(Position, Transferred);
                 FFrame := FindFrame(Data, FVBR);
             until (FFrame.Found) or (Transferred < SizeOf(Data));
@@ -904,15 +931,28 @@ begin
             begin
               if not FID3v1.Exists then Position := FFileLength - SizeOf(Data)
               else Position := FFileLength - SizeOf(Data) - 128;
+{$IFDEF WINDOWS}
               SetFilePointer(SourceFile, Position, nil, FILE_BEGIN);
               ReadFile(SourceFile, Data, SizeOf(Data), Transferred, nil);
+{$ELSE}
+              SourceFile.Seek(Position, 0);
+              SourceFile.Read(Data, SizeOf(Data));
+{$ENDIF}
               FVendorID := FindVendorID(Data, FFrame.Size * 5);
             end;
       end;
+{$IFDEF WINDOWS}
       CloseHandle(SourceFile);
+{$ELSE}
+      SourceFile.Free;
+{$ENDIF}
       Result := true;
     except
+{$IFDEF WINDOWS}
         if (SourceFile <> hINVALID_HANDLE_VALUE) then CloseHandle(SourceFile);
+{$ELSE}
+      SourceFile.Free;
+{$ENDIF}
         Result := false;
     end;
     if not FFrame.Found then FResetData;
