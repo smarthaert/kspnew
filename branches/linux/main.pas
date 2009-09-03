@@ -297,8 +297,6 @@ type  TWebView = class(TObject)
     procedure SetupOpenDialog;
     procedure LoadPlugins;
     procedure UnloadPlugins;
-  protected
-    procedure WndProc(var m: TLMessage); override;
   public
     { public declarations }
     LoadingPlaylist: boolean;
@@ -2104,16 +2102,6 @@ begin
   else
     TotalTimeLabel.Caption:=FormatDateTime ('nn:ss', Total / (1000 * 24 * 60 * 60));
 
-end;
-
-procedure TKSPMainWindow.WndProc(var m: TLMessage);
-begin
-  try
-    if Player<>nil then
-      Player.ProcMessage(m);
-  except
-  end;
-  inherited WndProc(m);
 end;
 
 procedure TKSPMainWindow.ScanFolders(Force: boolean);
