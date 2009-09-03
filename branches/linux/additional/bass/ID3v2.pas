@@ -82,7 +82,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  {$IFDEF WINDOWS}Windows, {$ENDIF}Classes, SysUtils, UniCodeUtils, FileUtil,
+  {$IFDEF WINDOWS}Windows, {$ENDIF}Classes, SysUtils, FileUtil, UniCodeUtils,
   {$IFNDEF DELPHI_2007_BELOW}AnsiStringStream,{$ENDIF} ID3v1;
 
 const

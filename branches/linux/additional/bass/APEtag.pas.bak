@@ -55,7 +55,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  Dialogs, Classes, SysUtils, UniCodeUtils
+  Dialogs, Classes, SysUtils,
  {$IFNDEF DELPHI_2007_BELOW}, AnsiStringStream, AnsiStrings{$ENDIF};
 
 const
@@ -331,7 +331,7 @@ begin
 { Process data if loaded and footer valid }
   if (Result) and (RefFooter.ID = APE_ID) then
   begin
-    SourceFile := TTntFileStream.Create(sFile, fmOpenReadWrite or fmShareDenyWrite);
+    SourceFile := TFileStream.Create(sFile, fmOpenReadWrite or fmShareDenyWrite);
   { If there is an ID3v1 tag roaming around behind the APE tag, we have to buffer it }
     if RefFooter.DataShift = ID3V1_TAG_SIZE then
     begin
@@ -406,7 +406,7 @@ begin
     FreeMem(ID3);
   end;
 
-  SourceFile := TTntFileStream.Create(sFile, fmOpenReadWrite or fmShareDenyWrite);
+  SourceFile := TFileStream.Create(sFile, fmOpenReadWrite or fmShareDenyWrite);
   SourceFile.Seek(0, soFromEnd);
   TagData.Seek(0, soFromBeginning);
   SourceFile.CopyFrom(TagData, TagData.Size);

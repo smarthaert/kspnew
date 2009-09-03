@@ -55,7 +55,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  Dialogs, Classes, SysUtils, UniCodeUtils
+  Dialogs, Classes, SysUtils
  {$IFNDEF DELPHI_2007_BELOW}, AnsiStringStream, AnsiStrings{$ENDIF};
 
 const
