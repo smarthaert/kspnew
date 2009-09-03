@@ -55,7 +55,7 @@ function WideFileSetDate(const FileName: WideString; Age: LongInt): LongInt;
 implementation
 
 uses
-  SysUtils, FileUtil;//{$IFDEF WINDOWS}, Windows, TntCollection{$ENDIF};
+  SysUtils, FileUtil;
 
 (* -------------------------------------------------------------------------- *)
 
