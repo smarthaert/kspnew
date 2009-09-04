@@ -534,8 +534,7 @@ begin
 
   if LoadingPlaylist then Exit;
   if LoadPlsThr<>nil then
-    if GetExitCodeThread(LoadPlsThr.Handle, e) then
-      TerminateThread(LoadPlsThr.Handle, e);
+    LoadPlsThr.Terminate;
 //  PlayList.Clear;
   LoadPlsThr:=TLoadPlsThread.Create(false, FileName);
  { with LoadPlsThr do
@@ -1543,7 +1542,6 @@ begin
 //  Player.Free;
   hLog.Free;
   TrayIcon1.Visible:=false;
-  ExitProcess(0);
 end;
 
 procedure TKSPMainWindow.FormWindowStateChange(Sender: TObject);

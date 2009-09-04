@@ -7,8 +7,8 @@ interface
 uses
   {$IFDEF WINDOWS}Windows,{$ENDIF} LResources, Messages, SysUtils, Classes, Forms, Controls, StdCtrls, ExtCtrls,
   Dynamic_BASS, RT_BASSWMA, RT_basscd, RT_bassmidi, bass_aac, RT_bassmix,
-  MPEGAudio, OggVorbis, AACfile, WMAFile, WAVFile,
-  MPEGInfoBox, OGGInfoBox, WMAInfoBox, Dialogs, FileSupportLst, LMessages;
+  MPEGAudio, OggVorbis, AACfile, {$IFDEF WINDOWS}WMAFile, {$ENDIF}WAVFile,
+  MPEGInfoBox, OGGInfoBox, {$IFDEF WINDOWS}WMAInfoBox, {$ENDIF}Dialogs, FileSupportLst, LMessages;
 
 
 const
@@ -225,7 +225,9 @@ type
     MPEG        : TMPEGaudio;
     Vorbis      : TOggVorbis;
     AAC         : TAACfile;
+{$IFDEF WINDOWS}
     WMA         : TWMAfile;
+{$ENDIF}
     WAV         : TWAVFile;
 
   //  MusicStartTime : DWORD;
@@ -239,7 +241,9 @@ type
 
     MPEGFileInfoForm: TMPEGFileInfoForm;
     OggVorbisInfoForm : TOggVorbisInfoForm;
+{$IFDEF WINDOWS}
     WMAInfoForm : TWMAInfoForm;
+{$ENDIF}
 
     FBASSReady      : boolean;
     FBASSWMAReady   : boolean;
@@ -257,7 +261,6 @@ type
     CDDriveList     : array[0..MAXCDDRIVES-1] of string;
 
     FVersionStr     : string;
-    FDLLVersionStr  : string;
     FStreamName     : string;
     FDecodingByPlugin : boolean;
   //  FUsing_BASS_AAC : boolean;
@@ -304,7 +307,6 @@ type
     procedure SetEQBands(Value : TEQBands);
   //  procedure SetSyncVisWindow(Value : boolean);
     procedure SetPlayerMode(Mode : TPlayerMode);
-    function  GetDLLVersionStr : string;
     function  GetNativeFileExts : string;
     function  IsSeekable : boolean;
     function  GetDownloadProgress : DWORD;
@@ -673,11 +675,6 @@ type
       //  Indicates the version of TBASSPlayer in string.
       //  note) Altering Version, which causes to perform SetVersionStr, takes no effects.
       //        SetVersionStr is needed only to show FVersionStr at form design.
-
-    property BASSDLLVer : string read FDLLVersionStr;
-      //  Indicates the version of BASS.DLL in string.
-      //  note) Altering BASSDLLVer, which causes to perform SetDLLVersionStr, takes no effects.
-      //        SetDLLVersionStr is needed only to show FDLLVersionStr at form design.
 
     property DX8EffectReady : boolean read FDX8EffectReady;
       //  Indicates whether TBASSPlayer is ready to use sound effects which are supported
@@ -1460,20 +1457,18 @@ begin
    BASSDLLLoaded := Load_BASSDLL(GetProgDir + 'bass.dll');
    if not BASSDLLLoaded then
    begin
-      if (csDesigning in ComponentState) then
-         FDLLVersionStr := 'N.A.(Copy bass.dll in <directory Delphi installed>\Bin to get version)'
-      else
-         FDLLVersionStr := '';
       exit;
    end;
 
  //  BASSVERSION & BASSVERSIONTEXT are defined in Dynamic_Bass.pas
+{$IFDEF WINDOWS}
    if (HIWORD(BASS_GetVersion)<> BASSVERSION) or (LOWORD(BASS_GetVersion) < 1) then
    begin
      if not (csDesigning in ComponentState) then
         ShowErrorMsgBox('BASS version is not ' + BASSVERSIONTEXT + ' !');
      exit;
    end;
+{$ENDIF}
 
    if not NoInit then begin
 
@@ -1521,8 +1516,6 @@ begin
    BASS_SetConfig(BASS_CONFIG_GVOL_MUSIC, FOutputVolume * 39);
    BASS_SetConfig(BASS_CONFIG_GVOL_STREAM, FOutputVolume * 39); 
 
-   FDLLVersionStr := GetDLLVersionStr;
-
    end else FBASSReady:=true;
 
    if not (csDesigning in ComponentState) then
@@ -1537,10 +1530,14 @@ begin
       if FileExists(GetProgDir + 'bassmix.dll') then
       begin
          if Load_BASSMIXDLL(GetProgDir + 'bassmix.dll') then
+{$IFDEF WINDOWS}
             if (HIWORD(BASS_Mixer_GetVersion) = BASSVERSION) then
+{$ENDIF}
                FMixerReady := true
+{$IFDEF WINDOWS}
             else
                ShowErrorMsgBox('BASS Mixer version is not ' + BASSVERSIONTEXT + ' !');
+{$ENDIF}
       end;
 
       if Load_BASSCDDLL(GetProgDir + 'basscd.dll') then
@@ -1568,13 +1565,17 @@ begin
       MPEG := TMPEGaudio.Create;
       Vorbis := TOggVorbis.Create;
       AAC := TAACfile.Create;
+{$IFDEF WINDOWS}
       WMA := TWMAfile.Create;
+{$ENDIF}
       WAV := TWAVFile.Create;
 
    // * Changed at Ver 2.00 ( the owner of the forms : Self -> AOwner )
       MPEGFileInfoForm := TMPEGFileInfoForm.Create(AOwner);
       OggVorbisInfoForm := TOggVorbisInfoForm.Create(AOwner);
+{$IFDEF WINDOWS}
       WMAInfoForm := TWMAInfoForm.Create(AOwner);
+{$ENDIF}
 
      { for i := 1 to MaxLoadableAddons do
          BASSAddonList[i].Handle := 0; }
@@ -1597,12 +1598,16 @@ begin
      MPEG.Free;
      Vorbis.Free;
      AAC.Free;
+{$IFDEF WINDOWS}
      WMA.Free;
+{$ENDIF}
      WAV.Free;
    //  QuitPluginCtrl;
      MPEGFileInfoForm.Free;
      OggVorbisInfoForm.Free;
+{$IFDEF WINDOWS}
      WMAInfoForm.Free;
+{$ENDIF}
 
     { if MessageHandle <> 0 then
         DeallocateHWnd(MessageHandle);   }
@@ -1636,25 +1641,6 @@ begin
    end;
 
    inherited Destroy;
-end;
-
-// Get the version information as string
-function TBASSPlayer.GetDLLVersionStr : string;
-var
-   VersionNum : DWORD;
-begin
-   if not BASSDLLLoaded then
-   begin
-      result := '';
-      exit;
-   end;
-
-   VersionNum := BASS_GetVersion;
-   result := intToStr(HIBYTE(HiWord(VersionNum))) + '.' +
-             intToStr(LOBYTE(HiWord(VersionNum))) + '.' +
-             intToStr(HIBYTE(LoWord(VersionNum))) + '.' +
-             intToStr(LOBYTE(LoWord(VersionNum)));
-   // intToStr(LoWord(VersionNum)) + '.' + intToStr(HiWord(VersionNum));
 end;
 
 function TBASSPlayer.GetNativeFileExts : string;
@@ -1761,6 +1747,7 @@ begin
          ShowMessage('Not a valid OGG Vorbis file - ' + StreamName)};
    end else if (ExtCode = '.WMA') or (ExtCode = '.ASF') then
    begin
+{$IFDEF WINDOWS}
       WMA.ReadFromFile(StreamName);
       if WMA.Valid then
       begin
@@ -1769,6 +1756,9 @@ begin
          result := true;
       end {else
          ShowMessage('Not a valid WMA file - ' + StreamName)};
+{$ELSE}
+      ShowMessage('WMA files supported only by Windows version');
+{$ENDIF}
    end;
 
    if StreamName = FStreamName then
@@ -1996,7 +1986,8 @@ begin
          result := true;
       end;
    end else if (ExtCode = '.WMA') or (ExtCode = '.ASF') then  // * Changed at Ver 2.00
-   begin                                                      //   (add for 'ASF' files)
+   begin
+{$IFDEF WINDOWS}                                                    //   (add for 'ASF' files)
       WMA.ReadFromFile(StreamName);
       if WMA.Valid then
       begin
@@ -2020,6 +2011,7 @@ begin
             SupportedBy := BASSNative;
          result := true;
       end;
+{$ENDIF}
    end else if ExtCode = '.CDA' then
    begin
       if FBASSCDReady then
