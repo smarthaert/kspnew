@@ -83,7 +83,7 @@ interface
 
 uses
   {$IFDEF WINDOWS}Windows, {$ENDIF}Classes, SysUtils, FileUtil, UniCodeUtils,
-  {$IFNDEF DELPHI_2007_BELOW}AnsiStringStream,{$ENDIF} ID3v1;
+  {$IFNDEF DELPHI_2007_BELOW}AnsiStringStream,{$ENDIF} ID3v1, Dialogs;
 
 const
   TAG_VERSION_2_2 = 2;                               { Code for ID3v2.2.x tag }

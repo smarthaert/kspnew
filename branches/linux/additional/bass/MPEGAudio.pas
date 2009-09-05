@@ -73,7 +73,7 @@ interface
 {$INCLUDE Delphi_Ver.inc}
 
 uses
-  Classes, SysUtils, ID3v1, ID3v2, APEtag, FileUtil;
+  Classes, SysUtils, ID3v1, ID3v2, APEtag, FileUtil, Dialogs;
 
 const
   { Table for bit rates }
@@ -282,11 +282,6 @@ type
     var MP3TagInfo: TMP3TagInfo): Boolean;
 
 implementation
-
-{$IFDEF WINDOWS}
-uses
-  Windows;
-{$ENDIF}
 
 const
   { Limitation constants }
@@ -841,8 +836,7 @@ end;
 
 function TMPEGaudio.ReadFromFile(const FileName: WideString): Boolean;
 var
-    SourceFile: TFileStream;
-    FFileLentgh: Int64;
+    SourceFile: hFileInt;
     Data: array [1..MAX_MPEG_FRAME_LENGTH * 2] of Byte;
     Transferred: DWORD;
     Position : Int64;
@@ -852,9 +846,10 @@ var
     Code: Integer;
 begin
     FResetData;
+    SourceFile := hINVALID_HANDLE_VALUE;
     try
-        SourceFile:=TFileStream.Create(FileName, fmOpenRead  or fmShareDenyWrite);
-        if SourceFile.Handle=feInvalidHandle then
+        SourceFile := FileOpen(FileName, fmOpenRead  or fmShareDenyWrite);
+        if (SourceFile = hINVALID_HANDLE_VALUE) then
         begin
             Result := false;
             Exit;
@@ -864,11 +859,10 @@ begin
         if (FID3v2.ReadFromFile(FileName)) and
            (FID3v1.ReadFromFile(FileName)) then
         begin
-            FFileLentgh:=FileSize(FileName);
+            FFileLength := FileSize(FileName);//, nil);
             Position := FID3v2.Size;
-
-            SourceFile.Seek(Position, 0);
-            SourceFile.Read(Data, SizeOf(Data));
+            FileSeek(SourceFile, Position, 0);
+            Transferred:=FileRead(SourceFile, Data, SizeOf(Data));//, Transferred, nil);
             FFrame := FindFrame(Data, FVBR);
             // Search for vendor ID at the beginning
             FVendorID := FindVendorID(Data, FFrame.Size * 5);
@@ -877,7 +871,7 @@ begin
             { Try to find the first frame if no frame at the beginning found ]}
             if (not FFrame.Found) and (Transferred = SizeOf(Data)) then
             repeat
-                SourceFile.Read(Data, SizeOf(Data));
+                Transferred:=FileRead(SourceFile, Data, SizeOf(Data));//, Transferred, nil);
                 Inc(Position, Transferred);
                 FFrame := FindFrame(Data, FVBR);
             until (FFrame.Found) or (Transferred < SizeOf(Data));
@@ -907,16 +901,16 @@ begin
             begin
               if not FID3v1.Exists then Position := FFileLength - SizeOf(Data)
               else Position := FFileLength - SizeOf(Data) - 128;
-              SourceFile.Seek(Position, 0);
-              SourceFile.Read(Data, SizeOf(Data));
+              FileSeek(SourceFile, Position, 0);
+              Transferred:=FileRead(SourceFile, Data, SizeOf(Data));//, Transferred, nil);
               FVendorID := FindVendorID(Data, FFrame.Size * 5);
             end;
       end;
-      SourceFile.Free;
+      FileClose(SourceFile);
       Result := true;
     except
-      SourceFile.Free;
-      Result := false;
+        if (SourceFile <> hINVALID_HANDLE_VALUE) then FileClose(SourceFile);
+        Result := false;
     end;
     if not FFrame.Found then FResetData;
 end;
