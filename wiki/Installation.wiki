@@ -22,7 +22,6 @@ All required libraries are also in installation pack
 = INSTALLATION (default) =
 
 By default KSP uses Sqlite3 database. That database doesn't require extra configuration which means that KSP will configure database automatically.
-Note that even if you have set configuration for MySQL but libmysql.dll can'tbe loaded then KSP will automatically switch to Sqlite3 database WITHOUT notification.
 
 = LOGS =
 
