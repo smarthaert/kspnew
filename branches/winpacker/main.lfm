@@ -1,0 +1,61 @@
+object Form1: TForm1
+  Left = 569
+  Height = 510
+  Top = 253
+  Width = 364
+  Caption = 'KSP Packer'
+  ClientHeight = 510
+  ClientWidth = 364
+  Position = poScreenCenter
+  LCLVersion = '0.9.29'
+  object Label1: TLabel
+    Left = 8
+    Height = 211
+    Top = 8
+    Width = 313
+    Caption = 'This application is designed to pack/unpack KSP files.'#13#10'Both packed and unpacked KSP can be executed '#13#10'normal way however there are a few significant differences '#13#10'between packed and unpacked version:'#13#10#13#10'Packed version:'#13#10'- decreased size on HDD of KSP'#13#10'- increased RAM usage (a few times!) during execution'#13#10'- increased startup time'#13#10#13#10'Unpacked version:'#13#10'- increased size on HDD (to around 40 MB)'#13#10'- decreased RAM usage'#13#10'- decreased startup time'
+    ParentColor = False
+  end
+  object Button1: TButton
+    Left = 8
+    Height = 25
+    Top = 232
+    Width = 123
+    Caption = 'Pack KSP'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 136
+    Height = 25
+    Top = 232
+    Width = 123
+    Caption = 'Unpack KSP'
+    OnClick = Button2Click
+    TabOrder = 1
+  end
+  object Memo1: TMemo
+    Left = 8
+    Height = 234
+    Top = 264
+    Width = 318
+    ReadOnly = True
+    TabOrder = 2
+  end
+  object Process1: TProcess
+    Active = False
+    Options = []
+    Priority = ppNormal
+    StartupOptions = []
+    ShowWindow = swoNone
+    WindowColumns = 0
+    WindowHeight = 0
+    WindowLeft = 0
+    WindowRows = 0
+    WindowTop = 0
+    WindowWidth = 0
+    FillAttribute = 0
+    left = 107
+    top = 283
+  end
+end
